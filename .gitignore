@@ -9,5 +9,13 @@ build/
 vs2019/
 vsxmake2019/
 
-#vsc
+# vsc
 .vscode/
+.vs/
+
+# Intellij
+.idea/
+
+# cmake
+cmake-build-debug/
+CMakeLists.txt
