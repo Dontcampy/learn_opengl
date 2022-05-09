@@ -1,13 +1,13 @@
 add_rules("mode.debug", "mode.release")
 add_requires("glfw", "glad", "stb", "glm")
+add_requires("imgui", {configs = {glfw_opengl3 = true}})
 
 target("learn_opengl")
     set_kind("binary")
     add_files("src/*.cpp")
     add_headerfiles("src/*.h")
 
-    add_packages("glfw", "glad", "stb", "glm")
-    -- add_syslinks("opengl32") -- seems no need
+    add_packages("glfw", "glad", "stb", "glm", "imgui")
 
     after_build(function (target)         
         os.cp("$(projectdir)\\Shaders\\*.vert", "$(projectdir)\\build\\$(os)\\$(arch)\\$(mode)\\Shaders\\")
