@@ -1,8 +1,18 @@
 add_rules("mode.debug", "mode.release")
+add_requires("glfw", "glad", "stb", "glm")
 
 target("learn_opengl")
     set_kind("binary")
     add_files("src/*.cpp")
+    add_headerfiles("src/*.h")
+
+    add_packages("glfw", "glad", "stb", "glm")
+    -- add_syslinks("opengl32") -- seems no need
+
+    after_build(function (target)         
+        os.cp("$(projectdir)\\Shaders\\*.vert", "$(projectdir)\\build\\$(os)\\$(arch)\\$(mode)\\Shaders\\")
+        os.cp("$(projectdir)\\Shaders\\*.frag", "$(projectdir)\\build\\$(os)\\$(arch)\\$(mode)\\Shaders\\")
+    end)
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
