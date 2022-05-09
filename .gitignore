@@ -8,3 +8,6 @@ build/
 # vs sln
 .vs2019/
 .vsxmake2019/
+
+#vsc
+.vscode/
