@@ -18,7 +18,7 @@
 #include <imgui_impl_opengl3.h>
 
 #include "Camera.h"
-#include "ShaderM.h"
+#include "Shader.h"
 #include "Time.h"
 #include "Debug.h"
 #include "Mouse.h"
