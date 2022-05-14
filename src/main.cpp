@@ -61,7 +61,7 @@ void ProcessInput(GLFWwindow* window)
         painter->HandleInput(window);
 }
 
-Painter* CreatePainter(const char* name)
+Painter* CreatePainter(const std::string& name)
 {
     if (name == "HelloMaterials")
     {
