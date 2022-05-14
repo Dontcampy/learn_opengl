@@ -79,27 +79,69 @@ void HelloMaterials::OnRender() {
 }
 
 void HelloMaterials::OnWindowAttach(GLFWwindow *wnd) {
-    Painter::OnWindowAttach(wnd);
 }
 
 void HelloMaterials::HandleInput(GLFWwindow *wnd) {
-    Painter::HandleInput(wnd);
+    GLfloat deltaTime = Time::deltaTime;
+    auto mainCamera = Camera::GetMainCamera();
+    if (glfwGetKey(wnd, GLFW_KEY_W))
+    {
+        mainCamera->ProcessKeyboard(FORWARD, deltaTime);
+    }
+    else if (glfwGetKey(wnd, GLFW_KEY_S))
+    {
+        mainCamera->ProcessKeyboard(BACKWARD, deltaTime);
+    }
+    if (glfwGetKey(wnd, GLFW_KEY_A))
+    {
+        mainCamera->ProcessKeyboard(LEFT, deltaTime);
+    }
+    else if (glfwGetKey(wnd, GLFW_KEY_D))
+    {
+        mainCamera->ProcessKeyboard(RIGHT, deltaTime);
+    }
 }
 
 void HelloMaterials::OnMouseMoveCallback(GLFWwindow *window, double xpos, double ypos) {
-    Painter::OnMouseMoveCallback(window, xpos, ypos);
+    if (Mouse::IsFisrtMove())
+    {
+        Mouse::SetLastXY(xpos, ypos);
+        Mouse::SetFirstMove(false);
+    }
+
+    GLfloat xoffset = xpos - Mouse::GetLastX();
+    GLfloat yoffset = Mouse::GetLastY() - ypos;  // Reversed since y-coordinates go from bottom to left
+
+    Mouse::SetLastXY(xpos, ypos);
+
+    Camera::GetMainCamera()->ProcessMouseMovement(xoffset, yoffset);
 }
 
 void HelloMaterials::OnMouseScrollCallBack(GLFWwindow *window, double xoffset, double yoffset) {
-    Painter::OnMouseScrollCallBack(window, xoffset, yoffset);
+    Camera::GetMainCamera()->ProcessMouseScroll(yoffset);
 }
 
 void HelloMaterials::OnDeInit() {
-    Painter::OnDeInit();
+    delete m_LightingObjShader;
+    delete m_LampShader;
 }
 
 void HelloMaterials::DrawLightParamWindow() {
-
+    ImGui::SetNextWindowPos(ImVec2(800, 600), 0, ImVec2(1, 1));
+    ImGui::Begin("Light Modifier", 0, ImGuiWindowFlags_AlwaysAutoResize);
+    ImGui::BulletText("Lamp Attribute");
+    ImGui::ColorEdit3("Lamp Color", lightColor);
+    ImGui::DragFloat3("Lamp Pos", lightPos, 0.05f);
+    ImGui::BulletText("Cube Attribute");
+    ImGui::DragFloat3("Ambient ", ambient, 0.05f, 0 ,1);
+    ImGui::DragFloat3("Diffuse ", diffuse, 0.05f, 0, 1);
+    ImGui::DragFloat3("Specular ", specular, 0.05f, 0, 1);
+    ImGui::SliderInt("shininess", &shininess, 0, 256);
+    ImGui::BulletText("Light Attribute");
+    ImGui::DragFloat3("Ambient ", light_ambient, 0.05f, 0, 1);
+    ImGui::DragFloat3("Diffuse ", light_diffuse, 0.05f, 0, 1);
+    ImGui::DragFloat3("Specular ", light_specular, 0.05f, 0, 1);
+    ImGui::End();
 }
 
 void HelloMaterials::basic_light_exercise3() {
