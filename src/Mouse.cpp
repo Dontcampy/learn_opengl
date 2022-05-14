@@ -4,7 +4,7 @@ float Mouse::LastX = 0;
 float Mouse::LastY = 0;
 bool Mouse::IsFirst = true;
 
-bool Mouse::IsFisrtMove()
+bool Mouse::IsFirstMove()
 {
     return IsFirst;
 }

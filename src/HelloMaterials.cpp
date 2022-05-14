@@ -100,10 +100,18 @@ void HelloMaterials::HandleInput(GLFWwindow *wnd) {
     {
         mainCamera->ProcessKeyboard(RIGHT, deltaTime);
     }
+    if (glfwGetKey(wnd, GLFW_KEY_SPACE))
+    {
+        mainCamera->ProcessKeyboard(UP, deltaTime);
+    }
+    else if (glfwGetKey(wnd, GLFW_KEY_LEFT_SHIFT))
+    {
+        mainCamera->ProcessKeyboard(DOWN, deltaTime);
+    }
 }
 
 void HelloMaterials::OnMouseMoveCallback(GLFWwindow *window, double xpos, double ypos) {
-    if (Mouse::IsFisrtMove())
+    if (Mouse::IsFirstMove())
     {
         Mouse::SetLastXY(xpos, ypos);
         Mouse::SetFirstMove(false);

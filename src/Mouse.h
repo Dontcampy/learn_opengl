@@ -2,7 +2,7 @@
 class Mouse
 {
 public:
-    static bool IsFisrtMove();
+    static bool IsFirstMove();
 
     static void SetFirstMove(bool bFirst);
 
