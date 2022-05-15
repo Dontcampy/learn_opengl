@@ -31,7 +31,7 @@ void OnKeyEvent(GLFWwindow* window, int key, int scancode, int action, int mods)
     {
         Debug::IsOpenDebugWnd = !Debug::IsOpenDebugWnd;
     }
-    if (key == GLFW_KEY_LEFT_ALT && action == GLFW_PRESS)
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
     {
         IgnoreInput = !IgnoreInput;
         if (IgnoreInput)
@@ -55,8 +55,8 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
 void ProcessInput(GLFWwindow* window)
 {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
+//    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+//        glfwSetWindowShouldClose(window, true);
     if (IgnoreInput)
         return;
     auto painter = static_cast<Painter*>(glfwGetWindowUserPointer(window));

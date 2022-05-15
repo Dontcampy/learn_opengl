@@ -41,6 +41,7 @@ void HelloMaterials::OnRender() {
     m_LightingObjShader->setVec3("light.position", lightPos[0], lightPos[1], lightPos[2]);
     m_LightingObjShader->setVec3("viewPos", mainCamera->Position);
 
+    m_LightingObjShader->setVec3("light.color", lightColor[0], lightColor[1], lightColor[2]);
     m_LightingObjShader->setVec3("light.ambient", light_ambient[0], light_ambient[1], light_ambient[2]);
     m_LightingObjShader->setVec3("light.diffuse", light_diffuse[0], light_diffuse[1], light_diffuse[2]);
     m_LightingObjShader->setVec3("light.specular", light_specular[0], light_specular[1], light_specular[2]);
@@ -144,7 +145,7 @@ void HelloMaterials::DrawLightParamWindow() {
     ImGui::DragFloat3("Ambient ", ambient, 0.05f, 0 ,1);
     ImGui::DragFloat3("Diffuse ", diffuse, 0.05f, 0, 1);
     ImGui::DragFloat3("Specular ", specular, 0.05f, 0, 1);
-    ImGui::SliderInt("shininess", &shininess, 0, 256);
+    ImGui::SliderInt("shininess", &shininess, 1, 256);
     ImGui::BulletText("Light Attribute");
     ImGui::DragFloat3("Ambient ", light_ambient, 0.05f, 0, 1);
     ImGui::DragFloat3("Diffuse ", light_diffuse, 0.05f, 0, 1);
