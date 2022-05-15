@@ -135,7 +135,7 @@ void HelloMaterials::OnDeInit() {
 }
 
 void HelloMaterials::DrawLightParamWindow() {
-    ImGui::SetNextWindowPos(ImVec2(800, 600), 0, ImVec2(1, 1));
+    ImGui::SetNextWindowPos(ImVec2(SCR_WIDTH, SCR_HEIGHT), 0, ImVec2(1, 1));
     ImGui::Begin("Light Modifier", 0, ImGuiWindowFlags_AlwaysAutoResize);
     ImGui::BulletText("Lamp Attribute");
     ImGui::ColorEdit3("Lamp Color", lightColor);

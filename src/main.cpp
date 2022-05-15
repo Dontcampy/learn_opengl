@@ -6,8 +6,11 @@ bool IgnoreInput = false;
 
 void OnMouseMove(GLFWwindow* window, double xpos, double ypos)
 {
-    if (IgnoreInput)
+    if (IgnoreInput) {
+        // Add imgui callback.
+        ImGui_ImplGlfw_CursorPosCallback(window, xpos, ypos);
         return;
+    }
     auto painter = static_cast<Painter*>(glfwGetWindowUserPointer(window));
     if (painter != nullptr)
         painter->OnMouseMoveCallback(window, xpos, ypos);
@@ -28,7 +31,7 @@ void OnKeyEvent(GLFWwindow* window, int key, int scancode, int action, int mods)
     {
         Debug::IsOpenDebugWnd = !Debug::IsOpenDebugWnd;
     }
-    if (key == GLFW_KEY_Y && action == GLFW_PRESS)
+    if (key == GLFW_KEY_LEFT_ALT && action == GLFW_PRESS)
     {
         IgnoreInput = !IgnoreInput;
         if (IgnoreInput)
@@ -74,7 +77,7 @@ void InitImGUI(GLFWwindow* window)
 {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
     io.WantCaptureMouse = true;
     //io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
     //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
@@ -199,6 +202,7 @@ int main()
 
     DiposeImGUI();
 
+    glfwDestroyWindow(window);
     glfwTerminate();
     return 0;
 }
